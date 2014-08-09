@@ -99,6 +99,8 @@ class LocationRepository extends EntityRepository
 			$oldEntityAlias = $entity[ 2 ];
 		}
 		
-		return $query->getQuery()->getOneOrNullResult();
+		$results = $query->getQuery()->getResult();
+
+		return count($results) ? $results[0] : null;
 	}
 }

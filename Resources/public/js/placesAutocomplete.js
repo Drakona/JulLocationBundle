@@ -221,4 +221,6 @@ function GmapInit( mapDiv, mapOptions, acFields, topLevel, zoomResolved, latitud
 		// Update image_url field value
 		if( ( componentField = document.getElementById( jsFieldIds.location.image_url ) ) !== null ) componentField.value = image_url;
 	}
+	
+	return map;
 }
