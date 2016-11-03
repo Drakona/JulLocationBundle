@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 /*
  * JulLocationBundle Symfony package.
@@ -16,5 +17,4 @@ use Jul\LocationBundle\Model\City as AbstractCity;
 
 abstract class City extends AbstractCity
 {
-	
 }

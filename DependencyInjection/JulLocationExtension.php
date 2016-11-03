@@ -7,7 +7,7 @@
  *
  * Full license information in the LICENSE text file distributed
  * with this source code.
- * 
+ *
  */
 
 namespace Jul\LocationBundle\DependencyInjection;
@@ -20,16 +20,16 @@ use Symfony\Component\DependencyInjection\Loader;
 class JulLocationExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function load( array $configs, ContainerBuilder $container )
+    public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
-        $loader->load( 'services.yml' );
-        
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
+
         $configuration = new Configuration();
-        $options = $this->processConfiguration( $configuration, $configs );
-        
-        $container->setParameter( 'jul_location.options', $options );
+        $options = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter('jul_location.options', $options);
     }
 }
