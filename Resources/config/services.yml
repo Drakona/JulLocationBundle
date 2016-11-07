@@ -7,29 +7,53 @@
 # with this source code.
 #
 
+parameters:
+    jul_location.helper.class: Jul\LocationBundle\Twig\Helper
+    jul_location.renderer.class: Jul\LocationBundle\Renderer\TwigRenderer
+    jul_location.twig.extension.class: Jul\LocationBundle\Twig\LocationExtension
+    jul_location.renderer.twig.template: "JulLocationBundle:Googlemaps:placesAutocomplete.html.twig"
+    jul_location.renderer.twig.options: []
+
 services:
-    
+    form.type.JulCityField:
+        class: Jul\LocationBundle\Form\Type\CityType
+        arguments: [ "city", "@doctrine.orm.entity_manager", "%jul_location.options%" ]
+        tags:
+            - { name: form.type, alias: JulCityField }
+
+    form.type.JulStateField:
+        class: Jul\LocationBundle\Form\Type\StateType
+        arguments: [ "state", "@doctrine.orm.entity_manager", "%jul_location.options%" ]
+        tags:
+            - { name: form.type, alias: JulStateField }
+
+    form.type.JulCountryField:
+        class: Jul\LocationBundle\Form\Type\CountryType
+        arguments: [ "country", "@doctrine.orm.entity_manager", "%jul_location.options%" ]
+        tags:
+            - { name: form.type, alias: JulCountryField }
+
     form.type.JulLocationField:
         class: Jul\LocationBundle\Form\Type\LocationType
         arguments: [ "location", "@doctrine.orm.entity_manager", "%jul_location.options%" ]
         tags:
             - { name: form.type, alias: JulLocationField }
-    
-    form.type.JulCityField:
-        class: Jul\LocationBundle\Form\Type\LocationType
-        arguments: [ "city", "@doctrine.orm.entity_manager", "%jul_location.options%" ]
+
+    jul_location.renderer:
+        class: "%jul_location.renderer.class%"
+        arguments:
+            - "@twig"
+            - "%jul_location.renderer.twig.template%"
+            - "%jul_location.options%"
+
+    jul_location.helper:
+        class: "%jul_location.helper.class%"
+        arguments:
+            - "@jul_location.renderer"
+
+    jul_location.twig.extension:
+        class: "%jul_location.twig.extension.class%"
+        arguments:
+            - "@jul_location.helper"
         tags:
-            - { name: form.type, alias: JulCityField }
-    
-    form.type.JulStateField:
-        class: Jul\LocationBundle\Form\Type\LocationType
-        arguments: [ "state", "@doctrine.orm.entity_manager", "%jul_location.options%" ]
-        tags:
-            - { name: form.type, alias: JulStateField }
-                
-    form.type.JulCountryField:
-        class: Jul\LocationBundle\Form\Type\LocationType
-        arguments: [ "country", "@doctrine.orm.entity_manager", "%jul_location.options%" ]
-        tags:
-            - { name: form.type, alias: JulCountryField }
-    
+            - { name: twig.extension }
