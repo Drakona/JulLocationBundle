@@ -1,5 +1,8 @@
-JulLocationBundle
-=================
+#Warning
+
+This is a fork of an abandoned bundle, only use for compatibility purpose on a client's project. Don't use it !
+
+#JulLocationBundle
 
 JulLocationBundle has been created to handle `Location` storage within Symfony. It ships
 with 4 preconfigured entities:
@@ -19,13 +22,11 @@ In addition, a Googlemap places autocomplete implementation is available to feed
 the entities with properly formatted data, show the location on a map,
 and even offer photos of the location when available.
 
-Documentation
--------------
+##Documentation
 
 Learn how to install and use JulLocationBundle in the [documentation](https://github.com/youlweb/JulLocationBundle/tree/master/Resources/doc/index.md)
 
-License
--------
+##License
 
 This bundle is under the MIT license. See the complete license in the bundle:
 
