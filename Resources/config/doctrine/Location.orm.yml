@@ -32,11 +32,11 @@ Jul\LocationBundle\Entity\Location:
             nullable: true
         
         address:
-            type: string
+            type: text
             nullable: true
         
         long_address:
-            type: string
+            type: text
             nullable: true
         
         postcode:
@@ -53,11 +53,11 @@ Jul\LocationBundle\Entity\Location:
             nullable: true
         
         image_url:
-            type: string
+            type: text
             nullable: true
         
         website_url:
-            type: string
+            type: text
             nullable: true
         
         phone:
