@@ -15,6 +15,7 @@ namespace Jul\LocationBundle\Form\DataTransformer;
 use Doctrine\ORM\EntityManagerInterface;
 use Jul\LocationBundle\Repository\LocationRepository;
 use Symfony\Component\Form\DataTransformerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class LocationTransformer implements DataTransformerInterface
 {
@@ -24,7 +25,7 @@ class LocationTransformer implements DataTransformerInterface
     private $entityType;
 
     /**
-     * @var \Doctrine\ORM\EntityManagerInterface
+     * @var EntityManagerInterface
      */
     private $om;
 
@@ -36,9 +37,9 @@ class LocationTransformer implements DataTransformerInterface
     private $configOptions;
 
     /**
-     * @param string                 $entityType
+     * @param string        $entityType
      * @param EntityManagerInterface $om
-     * @param array                  $configOptions
+     * @param array         $configOptions
      */
     public function __construct($entityType, EntityManagerInterface $om, $configOptions)
     {
