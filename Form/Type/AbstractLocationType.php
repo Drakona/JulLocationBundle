@@ -27,7 +27,7 @@ abstract class AbstractLocationType extends AbstractType
     private $entityType;
 
     /**
-     * @var \Doctrine\ORM\EntityManagerInterface
+     * @var EntityManagerInterface;
      */
     private $om;
 
@@ -39,9 +39,9 @@ abstract class AbstractLocationType extends AbstractType
     private $configOptions;
 
     /**
-     * @param string                 $entityType
+     * @param string        $entityType
      * @param EntityManagerInterface $om
-     * @param array                  $configOptions
+     * @param array         $configOptions
      */
     public function __construct($entityType, EntityManagerInterface $om, $configOptions)
     {
