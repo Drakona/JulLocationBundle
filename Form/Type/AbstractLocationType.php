@@ -12,7 +12,7 @@
 
 namespace Jul\LocationBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Jul\LocationBundle\Form\DataTransformer\LocationTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -27,7 +27,7 @@ abstract class AbstractLocationType extends AbstractType
     private $entityType;
 
     /**
-     * @var ObjectManager;
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $om;
 
@@ -39,11 +39,11 @@ abstract class AbstractLocationType extends AbstractType
     private $configOptions;
 
     /**
-     * @param string        $entityType
-     * @param ObjectManager $om
-     * @param array         $configOptions
+     * @param string                 $entityType
+     * @param EntityManagerInterface $om
+     * @param array                  $configOptions
      */
-    public function __construct($entityType, ObjectManager $om, $configOptions)
+    public function __construct($entityType, EntityManagerInterface $om, $configOptions)
     {
         $this->entityType = $entityType;
         $this->om = $om;
