@@ -14,7 +14,7 @@ namespace Jul\LocationBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\Common\Util\Inflector;
+use Doctrine\Inflector\Inflector;
 
 class LocationRepository extends EntityRepository
 {
