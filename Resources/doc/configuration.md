@@ -147,6 +147,12 @@ jul_location:
                 identifier: true
                 type: null
                 options: []
+            iso:
+                enabled: true
+                required: false
+                identifier: true
+                type: hidden
+                options: []
             short_name:
                 enabled: false
                 required: false

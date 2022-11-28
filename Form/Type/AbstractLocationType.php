@@ -69,6 +69,10 @@ abstract class AbstractLocationType extends AbstractType
                     $fieldArray[ 'options' ][ 'required' ] = $this->configOptions[ $this->entityType ][ 'fields' ][ $field ][ 'required' ];
                 }
 
+                if ($fieldArray[ 'type' ] == 'hidden') {
+                    $fieldArray[ 'type' ] = 'Symfony\Component\Form\Extension\Core\Type\HiddenType';
+                }
+
                 $builder->add($field, $fieldArray[ 'type' ], $fieldArray[ 'options' ]);
             }
         }

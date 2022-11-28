@@ -20,36 +20,42 @@ abstract class Country
     /**
      * @var int
      */
-    protected $id;
+    protected $id = null;
 
     /**
      * @var string
      * @Assert\NotBlank(groups={"country_name"})
      */
-    protected $name;
+    protected $name = null;
 
     /**
      * @var string
      * @Assert\NotBlank(groups={"country_short_name"})
      */
-    protected $short_name;
+    protected $short_name = null;
 
     /**
      * @var string
      */
-    protected $slug;
+    protected $slug = null;
 
     /**
      * @var float
      * @Assert\NotBlank(groups={"country_latitude"})
      */
-    protected $latitude;
+    protected $latitude = null;
 
     /**
      * @var float
      * @Assert\NotBlank(groups={"country_longitude"})
      */
-    protected $longitude;
+    protected $longitude = null;
+
+    /**
+     * @var string
+     * @Assert\NotBlank(groups={"country_iso"})
+     */
+    protected $iso = null;
 
     /*
      * --------------------------------------------------------
@@ -183,6 +189,30 @@ abstract class Country
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * Set iso
+     *
+     * @param string $iso
+     *
+     * @return Country
+     */
+    public function setIso($iso)
+    {
+        $this->iso = $iso;
+
+        return $this;
+    }
+
+    /**
+     * Get iso
+     *
+     * @return string
+     */
+    public function getIso()
+    {
+        return $this->iso;
     }
 
     /**
