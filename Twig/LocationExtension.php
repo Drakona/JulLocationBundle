@@ -2,35 +2,33 @@
 
 namespace Jul\LocationBundle\Twig;
 
-class LocationExtension extends \Twig_Extension
-{
-    private $helper;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-    /**
-     * @param Helper $helper
-     */
+class LocationExtension extends AbstractExtension
+{
+    private Helper $helper;
+
     public function __construct(Helper $helper)
     {
         $this->helper = $helper;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
-        return array(
-             new \Twig_SimpleFunction('jul_location_render', array($this, 'render'), array('is_safe' => array('html'))),
-        );
+        return [
+             new TwigFunction('jul_location_render', [$this, 'render'], ['is_safe' => ['html']]),
+        ];
     }
 
     /**
      * Renders a menu with the specified renderer.
      *
-     * @param ItemInterface|string|array $menu
-     * @param array                      $options
-     * @param string                     $renderer
+     * @param array $options
      *
      * @return string
      */
-    public function render(array $options = array())
+    public function render(array $options = [])
     {
         return $this->helper->render($options);
     }
