@@ -15,6 +15,7 @@ namespace Jul\LocationBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 
 class LocationRepository extends EntityRepository
 {
@@ -29,14 +30,20 @@ class LocationRepository extends EntityRepository
     private $configOptions;
 
     /**
-     * @param string        $entityType
-     * @param ObjectManager $om
-     * @param array         $configOptions
+     * @var Inflector
+     */
+    private $inflector;
+
+    /**
+     * @param string                               $entityType
+     * @param \Doctrine\ORM\EntityManagerInterface $om
+     * @param array                                $configOptions
      */
     public function __construct($entityType, $om, $configOptions)
     {
         $this->configOptions = $configOptions;
         $this->entityType = $entityType;
+        $this->inflector = InflectorFactory::create()->build();
 
         $class = new ClassMetadata($this->configOptions[$entityType]['data_class']);
 
@@ -75,7 +82,7 @@ class LocationRepository extends EntityRepository
                 $entityAlias = $entity[2];
                 $query->leftJoin($oldEntityAlias.'.'.$entity, $entityAlias);
 
-                $method = 'get'.Inflector::classify($entity);
+                $method = 'get' . $this->inflector->classify($entity);
                 $entityObject = $entityObject->$method();
             }
 
@@ -84,7 +91,7 @@ class LocationRepository extends EntityRepository
             } else {
                 foreach ($this->configOptions[$entity]['fields'] as $field => $options) {
                     if ($options['enabled'] && $options['identifier']) {
-                        $method = 'get'.Inflector::classify($field);
+                        $method = 'get' . $this->inflector->classify($field);
 
                         $query->andWhere("{$entityAlias}.{$field} LIKE :{$entity}{$field} OR ( {$entityAlias}.id IS NOT NULL AND {$entityAlias}.{$field} IS NULL AND :{$entity}{$field} IS NULL )")
                                 ->setParameter($entity.$field, $entityObject->$method());
