@@ -108,7 +108,7 @@ class LocationRepositoryTest extends WebTestCase
         $this->om->close();
     }
 
-    public function testLocationRepository()
+    public function testLocationRepository(): void
     {
         echo "\n\n\x1B[31mCAUTION!\x1B[37m The LocationRepository test uses your DB connection, therefore:";
         echo "\n - Every entity in the JulLocationBundle must be configured.";

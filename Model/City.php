@@ -17,39 +17,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class City
 {
-    /**
-     * @var int
-     */
-    protected $id;
+    protected ?int $id = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"city_name"})
-     */
-    protected $name;
+    #[Assert\NotBlank(groups: ['city_name'])]
+    protected ?string $name = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"city_long_name"})
-     */
-    protected $long_name;
+    #[Assert\NotBlank(groups: ['city_long_name'])]
+    protected ?string $long_name = null;
 
-    /**
-     * @var string
-     */
-    protected $slug;
+    protected ?string $slug = null;
 
-    /**
-     * @var float
-     * @Assert\NotBlank(groups={"city_latitude"})
-     */
-    protected $latitude;
+    #[Assert\NotBlank(groups: ['city_latitude'])]
+    protected ?float $latitude = null;
 
-    /**
-     * @var float
-     * @Assert\NotBlank(groups={"city_longitude"})
-     */
-    protected $longitude;
+    #[Assert\NotBlank(groups: ['city_longitude'])]
+    protected ?float $longitude = null;
 
     /*
      * --------------------------------------------------------

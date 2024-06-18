@@ -17,45 +17,24 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class Country
 {
-    /**
-     * @var int
-     */
-    protected $id = null;
+    protected ?int $id = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"country_name"})
-     */
-    protected $name = null;
+    #[Assert\NotBlank(groups: ['country_name'])]
+    protected ?string $name = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"country_short_name"})
-     */
-    protected $short_name = null;
+    #[Assert\NotBlank(groups: ['country_short_name'])]
+    protected ?string $short_name = null;
 
-    /**
-     * @var string
-     */
-    protected $slug = null;
+    protected ?string $slug = null;
 
-    /**
-     * @var float
-     * @Assert\NotBlank(groups={"country_latitude"})
-     */
-    protected $latitude = null;
+    #[Assert\NotBlank(groups: ['country_latitude'])]
+    protected ?float $latitude = null;
 
-    /**
-     * @var float
-     * @Assert\NotBlank(groups={"country_longitude"})
-     */
-    protected $longitude = null;
+    #[Assert\NotBlank(groups: ['country_longitude'])]
+    protected ?float $longitude = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"country_iso"})
-     */
-    protected $iso = null;
+    #[Assert\NotBlank(groups: ['country_iso'])]
+    protected ?string $iso = null;
 
     /*
      * --------------------------------------------------------

@@ -17,75 +17,39 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class Location
 {
-    /**
-     * @var int
-     */
-    protected $id;
+    protected ?int $id = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"location_name"})
-     */
-    protected $name;
+    #[Assert\NotBlank(groups: ['location_name'])]
+    protected ?string $name = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"location_long_name"})
-     */
-    protected $long_name;
+    #[Assert\NotBlank(groups: ['location_long_name'])]
+    protected ?string $long_name = null;
 
-    /**
-     * @var string
-     */
-    protected $slug;
+    protected ?string $slug = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"location_address"})
-     */
-    protected $address;
+    #[Assert\NotBlank(groups: ['location_address'])]
+    protected ?string $address = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"location_long_address"})
-     */
-    protected $long_address;
+    #[Assert\NotBlank(groups: ['location_long_address'])]
+    protected ?string $long_address = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"location_postcode"})
-     */
-    protected $postcode;
+    #[Assert\NotBlank(groups: ['location_postcode'])]
+    protected ?string $postcode = null;
 
-    /**
-     * @var float
-     * @Assert\NotBlank(groups={"location_latitude"})
-     */
-    protected $latitude;
+    #[Assert\NotBlank(groups: ['location_latitude'])]
+    protected ?float $latitude = null;
 
-    /**
-     * @var float
-     * @Assert\NotBlank(groups={"location_longitude"})
-     */
-    protected $longitude;
+    #[Assert\NotBlank(groups: ['location_longitude'])]
+    protected ?float $longitude = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"location_image_url"})
-     */
-    protected $image_url;
+    #[Assert\NotBlank(groups: ['location_image_url'])]
+    protected ?string $image_url = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"location_website_url"})
-     */
-    protected $website_url;
+    #[Assert\NotBlank(groups: ['location_website_url'])]
+    protected ?string $website_url = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"location_phone"})
-     */
-    protected $phone;
+    #[Assert\NotBlank(groups: ['location_phone'])]
+    protected ?string $phone = null;
 
     /*
      * --------------------------------------------------------

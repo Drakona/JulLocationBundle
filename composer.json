@@ -20,5 +20,8 @@
         "psr-0": { "Jul\\LocationBundle": "" }
     },
     "minimum-stability": "dev",
-    "target-dir": "Jul/LocationBundle"
+    "target-dir": "Jul/LocationBundle",
+    "require-dev": {
+        "rector/rector": "dev-main"
+    }
 }

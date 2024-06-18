@@ -50,7 +50,7 @@ abstract class AbstractLocationType extends AbstractType
         $this->configOptions = $configOptions;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $entitiesArray = array(
             'location' => array('city', 'state', 'country'),
@@ -93,7 +93,7 @@ abstract class AbstractLocationType extends AbstractType
         $builder->addModelTransformer($transformer);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         /*
          * Generate Validation array from config
