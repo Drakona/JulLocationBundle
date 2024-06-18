@@ -40,7 +40,7 @@ class LocationTypeTest extends TypeTestCase
      */
     private $entitiesArray = array('location', 'city', 'state', 'country');
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -83,7 +83,7 @@ class LocationTypeTest extends TypeTestCase
         $this->om->close();
     }
 
-    public function testBindValidData()
+    public function testBindValidData(): void
     {
         $formData = array();
 

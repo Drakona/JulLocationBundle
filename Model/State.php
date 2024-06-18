@@ -17,45 +17,24 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class State
 {
-    /**
-     * @var int
-     */
-    protected $id;
+    protected ?int $id = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"state_name"})
-     */
-    protected $name;
+    #[Assert\NotBlank(groups: ['state_name'])]
+    protected ?string $name = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"state_long_name"})
-     */
-    protected $long_name;
+    #[Assert\NotBlank(groups: ['state_long_name'])]
+    protected ?string $long_name = null;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(groups={"state_short_name"})
-     */
-    protected $short_name;
+    #[Assert\NotBlank(groups: ['state_short_name'])]
+    protected ?string $short_name = null;
 
-    /**
-     * @var string
-     */
-    protected $slug;
+    protected ?string $slug = null;
 
-    /**
-     * @var float
-     * @Assert\NotBlank(groups={"state_latitude"})
-     */
-    protected $latitude;
+    #[Assert\NotBlank(groups: ['state_latitude'])]
+    protected ?float $latitude = null;
 
-    /**
-     * @var float
-     * @Assert\NotBlank(groups={"state_longitude"})
-     */
-    protected $longitude;
+    #[Assert\NotBlank(groups: ['state_longitude'])]
+    protected ?float $longitude = null;
 
     /*
      * --------------------------------------------------------

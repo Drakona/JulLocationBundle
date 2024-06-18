@@ -18,93 +18,61 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class LocationTransformer implements DataTransformerInterface
 {
-    /**
-     * @var string
-     */
-    private $entityType;
-
-    /**
-     * @var \Doctrine\ORM\EntityManagerInterface
-     */
-    private $om;
-
-    /**
-     * Options sent via form Type.
-     *
-     * @var array
-     */
-    private $configOptions;
-
-    /**
-     * @param string                 $entityType
-     * @param EntityManagerInterface $om
-     * @param array                  $configOptions
-     */
-    public function __construct($entityType, EntityManagerInterface $om, $configOptions)
-    {
-        $this->entityType = $entityType;
-        $this->om = $om;
-        $this->configOptions = $configOptions;
+    public function __construct(
+        private readonly string $entityType,
+        private readonly EntityManagerInterface $om,
+        private readonly array $configOptions
+    ) {
     }
 
-    /**
-     * @param object|null $entityObject
-     *
-     * @return object
-     */
-    public function transform($entityObject)
+    public function transform($value): mixed
     {
-        if (null === $entityObject) {
+        if (null === $value) {
             return null;
         }
 
-        return $entityObject;
+        return $value;
     }
 
-    /**
-     * @param object|null $entityObject
-     *
-     * @return object
-     */
-    public function reverseTransform($entityObject)
+    public function reverseTransform($value)
     {
         /*
          * Check if Entity exists if demanded in configuration (default true)
          */
         $locationRepository = new LocationRepository($this->entityType, $this->om, $this->configOptions);
 
-        if (!$entityObject->getId() || !$this->configOptions[$this->entityType]['update']) {
-            $entityDB = $locationRepository->findEntityObject($entityObject);
+        if (!$value->getId() || !$this->configOptions[$this->entityType]['update']) {
+            $entityDB = $locationRepository->findEntityObject($value);
 
             if ($entityDB) {
                 // if Location found in DB
 
-                if ($this->om->contains($entityObject)) {
+                if ($this->om->contains($value)) {
                     /*
                      * if entity is managed (update process):
                      * - restore the managed entity to its original state to preserve its data content
                      * - return the DB entity
                      */
-                    $this->om->refresh($entityObject);
+                    $this->om->refresh($value);
                 }
 
                 return $entityDB;
-            } elseif ($this->om->contains($entityObject)) {
+            } elseif ($this->om->contains($value)) {
                 /*
                  * if Location is not found in DB, but entity is managed (update process):
                  * - clone the entity
                  * - free the original from management to preserve its data content
                  * - persist the clone
                  */
-                $newEntity = clone $entityObject;
+                $newEntity = clone $value;
                 $newEntity->setSlug(null);    // to trigger Gedmo slug
-                $this->om->detach($entityObject);
-                $entityObject = $newEntity;
+                $this->om->detach($value);
+                $value = $newEntity;
             }
         }
 
-        $this->om->persist($entityObject);
+        $this->om->persist($value);
 
-        return $entityObject;
+        return $value;
     }
 }

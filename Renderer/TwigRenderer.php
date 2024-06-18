@@ -2,23 +2,19 @@
 
 namespace Jul\LocationBundle\Renderer;
 
+use Twig\Environment;
+
 class TwigRenderer implements RendererInterface
 {
     /**
-     * @var \Twig_Environment
+     * @var \Twig\Environment
      */
-    private $environment;
+    private Environment $environment;
     private $matcher;
-    private $defaultOptions;
-    private $bundleOptions;
+    private array $defaultOptions;
+    private array $bundleOptions;
 
-    /**
-     * @param \Twig_Environment $environment
-     * @param string            $template
-     * @param array             $bundleOptions
-     * @param array             $defaultOptions
-     */
-    public function __construct(\Twig_Environment $environment, $template, array $bundleOptions = [], array $defaultOptions = [])
+    public function __construct(Environment $environment, string $template, array $bundleOptions = [], array $defaultOptions = [])
     {
         $this->environment    = $environment;
         $this->bundleOptions  = $bundleOptions;
@@ -45,6 +41,9 @@ class TwigRenderer implements RendererInterface
         return $this->environment->render($options['template'], $options);
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function handleOptions($options = [])
     {
         $options         = array_merge($this->defaultOptions, $options);
@@ -65,7 +64,7 @@ class TwigRenderer implements RendererInterface
         /*
          * Find top level entity
          */
-        $locationTypes = array('location', 'city', 'state', 'country');
+        $locationTypes = ['location', 'city', 'state', 'country'];
 
         foreach ($locationTypes as $locationType) {
             if (array_key_exists($locationType, $locationForm->children)) {
@@ -124,16 +123,11 @@ class TwigRenderer implements RendererInterface
          * Default autocomplete Types
          */
         if (!isset($acFields[0]['acOptions']['types'])) {
-            switch ($topLevel) {
-                case 'location':
-                    $acFields[0]['acOptions']['types'] = array('establishment');
-                    break;
-                case 'city':
-                    $acFields[0]['acOptions']['types'] = array('(cities)');
-                    break;
-                default:
-                    $acFields[0]['acOptions']['types'] = array('(regions)');
-            }
+            $acFields[0]['acOptions']['types'] = match ($topLevel) {
+                'location' => ['establishment'],
+                'city' => ['(cities)'],
+                default => ['(regions)'],
+            };
         }
 
         /*

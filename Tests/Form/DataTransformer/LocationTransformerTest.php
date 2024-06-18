@@ -118,7 +118,7 @@ class LocationTransformerTest extends WebTestCase
         $this->om->close();
     }
 
-    public function testTransform()
+    public function testTransform(): void
     {
         $location = $this->getLocation();
         $this->assertEquals($location->getId(), $this->transformer->transform($location)->getId());
@@ -127,7 +127,7 @@ class LocationTransformerTest extends WebTestCase
         $this->assertNull($location, $this->transformer->transform($location));
     }
 
-    public function testReverseTransform()
+    public function testReverseTransform(): void
     {
         echo "\n\n\x1B[31mCAUTION!\x1B[37m The LocationTransformer test uses your DB connection, therefore:";
         echo "\n - Every entity in the JulLocationBundle must be configured.";
